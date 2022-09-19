@@ -66,4 +66,8 @@ function Person(name, surname, age, gender, cars = []){
 
 
 
+let car = new Car("Mercedes", "E190", 1991);
+console.log(car.getCarInfo())
+
+
 
