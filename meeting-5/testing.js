@@ -124,9 +124,6 @@ function callMe(a, b, callback){
 }
 
 
-callMe(2, 3, (data) => {
-    console.log(data); 
-});
 
 
 callMe(2, 3, result);
