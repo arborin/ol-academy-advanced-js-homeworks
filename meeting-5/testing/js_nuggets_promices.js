@@ -11,3 +11,13 @@ promise.then((data)=>{
 }).catch((err) => {
     console.log(err);
 });
+
+
+// Promices examples
+
+
+function addNumber(a, b){
+    
+}
+
+
