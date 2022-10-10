@@ -7,7 +7,13 @@ npm -v - check npm version
 
 > პაკეტის ინსტალაცია
 
-npm init - ეს ბრძანება ქმნის ფაილს package.json
+npm init - ეს ბრძანება ქმნის ფაილს: package.json
+
+ეს არის ფაილი რომელიც ინახავს ინფორმაციას პაკეტების შესახებ
+რომელზეც დამოკიდებულია აპლიკაცია
+
+
+=============================================================
 
 npm -i moment - შეიქმნება noe_modules-დირექტორია პაკეტით.
 
@@ -16,3 +22,43 @@ npm -i moment - შეიქმნება noe_modules-დირექტორ
 
 browserify - require_მოდულებს ხელმისაწვდომს ხდის ბრაუზერში
 
+
+=============================================================
+
+npm install - ნახულობს დეფენდენსებს (package.json_ში) და აინსტალირებს მოდულებს
+
+dev_dependences - დეველოპმენტისთვის პაკეტები
+
+npm install --save-dev gulp gulp-sass  // რემდენიმე მოდულის დაინსტალიერება
+
+npm install --> install all dependences
+npm install production --> don't install development dependences
+
+
+=============================================================
+
+UNINSTALL
+
+npm uninstall gulp-sass --save-dev
+npm remove gulp-sass --save-dev
+
+=============================================================
+
+install specific version
+
+npm install lodash@4.17.3 --save
+
+npm update lodash
+
+=============================================================
+
+VERSION NUMBERS
+
+8.               2.                .6
+major          minor              pach
+break api      dont break        dont break
+
+* - new version
+^ - start on this version
+
+nodemon - restarting node server
