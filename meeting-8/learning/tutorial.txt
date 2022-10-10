@@ -1,0 +1,18 @@
+# NPM
+node package manager
+
+node -v - check node version
+
+npm -v - check npm version
+
+> პაკეტის ინსტალაცია
+
+npm init - ეს ბრძანება ქმნის ფაილს package.json
+
+npm -i moment - შეიქმნება noe_modules-დირექტორია პაკეტით.
+
+> package-lock.json - რომელიც შეიცავს ინფორმაციას
+ინსტალირებულ პაკეტებზე
+
+browserify - require_მოდულებს ხელმისაწვდომს ხდის ბრაუზერში
+
