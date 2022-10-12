@@ -62,3 +62,5 @@ break api      dont break        dont break
 ^ - start on this version
 
 nodemon - restarting node server
+
+npm list
