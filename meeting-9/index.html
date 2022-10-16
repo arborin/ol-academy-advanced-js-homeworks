@@ -19,11 +19,24 @@
         
         <script type="text/babel">
             class App extends React.Component{
+                
+                state = {
+                    name: "Nika Kobaidze",
+                    age: 30    
+                }
+                
+                handClick = (e) => {
+                    console.log(e.target);
+                    console.log(this.state);
+                }
+                
                 render(){
                     return (
                         <div className="app-content">
                             <h1>Hello world</h1>
                             <p>{ Math.random() * 10 }</p>
+                            <p>My Name: { this.state.name }, Age: {this.state.age} </p>
+                            <button onClick={this.handClick}>Click Me</button>
                         </div>
                     )
                 }
