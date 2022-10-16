@@ -21,21 +21,68 @@
             class App extends React.Component{
                 
                 state = {
-                    name: "Nika Kobaidze",
-                    age: 30    
-                }
+                    name: "",
+                    age: 30,
+                    todo: [{
+                        title: "test task"
+                    }]    
+                };
+                
                 
                 handClick = (e) => {
-                    console.log(e.target);
-                    console.log(this.state);
+                    // console.log(e.target);
+                    // console.log(this.state);
+                    
+                    this.setState({name: "Bob", age: 25});
                 }
                 
+                handleChange = (e) => {
+                    let temp = {...this.state}
+                    temp.name = e.target.value; 
+                    this.setState(temp)
+                    // console.log(e.target.value);
+                }
+                
+                handleSubmit = (e) => {
+                    e.preventDefault();
+                    console.log("FORM SUBMITED: " + this.state.name);
+                    
+                    let title = this.state.name;
+                    
+                    let temp = {...this.state};
+                    temp.name = '';
+                    temp.todo.push({title: title});
+                    console.log(temp);
+                    
+                    this.setState(temp);
+                    
+                }
+                
+                
+                
                 render(){
+                    
+                    const ListItems = () => (
+                        <ul>
+                            {this.state.todo.map((d) => <li key={d.title}>{d.title}</li>)}
+                        </ul>
+                    )
+                    
                     return (
                         <div className="app-content">
                             <h1>Hello world</h1>
                             <p>{ Math.random() * 10 }</p>
                             <p>My Name: { this.state.name }, Age: {this.state.age} </p>
+                            
+                            <form onSubmit={this.handleSubmit}>
+                                <input type="text" value={this.name} onChange={this.handleChange}/>
+                                <button type="submit">Save</button>
+                            </form>
+                            
+                            
+                                <ListItems/>
+                            
+                            <p>{this.number}</p>
                             <button onClick={this.handClick}>Click Me</button>
                         </div>
                     )
