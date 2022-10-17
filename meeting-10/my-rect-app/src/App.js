@@ -1,6 +1,7 @@
 import './App.css';
-import Test from './components/Test';
+// import Test from './components/Test';
 import Counter from './components/Counter';
+import Todo from './components/Todo';
 
 function App() {
   return (
@@ -8,6 +9,9 @@ function App() {
       hello world
       <div>
         <Counter/>
+      </div>
+      <div>
+        <Todo/>
       </div>
     </div>
   );
