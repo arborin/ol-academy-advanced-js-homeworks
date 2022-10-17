@@ -1,0 +1,2 @@
+npm - packet manager
+npx - run packet
