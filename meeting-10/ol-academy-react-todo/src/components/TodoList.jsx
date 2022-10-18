@@ -1,8 +1,47 @@
 import React from 'react';
+import Alert from './Alert';
 
 
 
 class TodoList extends React.Component{
+    
+    constructor(props){
+        super(props);
+        this.state = {
+            todos: [
+                {name: "Javascript", status: 'active'},
+                {name: "React", status: 'done'}
+            ],
+            inputValue: "",
+            nameExists: false,
+        };
+    }
+    
+    
+    todoInputHandle = (e) => {
+        this.setState({inputValue: e.target.value});
+    }
+    
+    saveTask = () => {
+        const inputVal = this.state.inputValue;
+        this.setState({nameExists: false})
+        
+        //check if name exists
+        this.state.todos.map((todo)=>{
+            if(todo.name == inputVal){
+                this.setState({nameExists: true})
+            }
+        })
+        
+        
+        if(this.state.nameExists === false){
+            this.state.todos.push({ name : inputVal, status: 'active'});
+            this.setState({todos: this.state.todos });
+        }
+        
+        this.setState({inputValue: ''}); // claer input value
+        
+    }
     
     
     render(){
@@ -21,19 +60,21 @@ class TodoList extends React.Component{
                                             <form className="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
                                                 <div className="col-12">
                                                     <div className="form-outline">
-                                                        <input type="text" id="form1" className="form-control" />
+                                                        <input type="text" onChange={ this.todoInputHandle } value={this.state.inputValue} id="form1" className="form-control" />
                                                         
                                                     </div>
                                                 </div>
 
                                                 <div className="col-12">
-                                                    <button type="submit" className="btn btn-primary">Save</button>
+                                                    <button type="button" onClick={ this.saveTask } className="btn btn-primary">Save</button>
                                                 </div>
 
                                                 <div className="col-12">
-                                                    <button type="submit" className="btn btn-warning">Get tasks</button>
+                                                    <button type="button" className="btn btn-warning">Delete All</button>
                                                 </div>
                                             </form>
+                                            
+                                            { (this.state.nameExists) && <Alert/>}
 
                                             <table className="table mb-4">
                                                 <thead>
@@ -45,33 +86,25 @@ class TodoList extends React.Component{
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Buy groceries for next week</td>
-                                                        <td>In progress</td>
-                                                        <td>
-                                                            <button type="submit" className="btn btn-danger">Delete</button>
-                                                            <button type="submit" className="btn btn-success ms-1">Finished</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>Renew car insurance</td>
-                                                        <td>In progress</td>
-                                                        <td>
-                                                            <button type="submit" className="btn btn-danger">Delete</button>
-                                                            <button type="submit" className="btn btn-success ms-1">Finished</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>Sign up for online course</td>
-                                                        <td>In progress</td>
-                                                        <td>
-                                                            <button type="submit" className="btn btn-danger">Delete</button>
-                                                            <button type="submit" className="btn btn-success ms-1">Finished</button>
-                                                        </td>
-                                                    </tr>
+                                                    {   
+                                                        this.state.todos.map((todo, index) => {
+
+                                                            return (
+                                                                    <tr key={index} className={ (todo.status === 'done') ? 'table-success' : ''}>
+                                                                        <td>{index}</td>
+                                                                        <td>{todo.name}</td>
+                                                                        <td>{todo.status}</td>
+                                                                        <td>
+                                                                            <button type="submit" className="btn btn-danger btn-sm">Delete</button>
+                                                                            
+                                                                            { (todo.status === 'active') ? <button type="submit" className="btn btn-success ms-1 btn-sm">Done</button> : ''}
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                        })
+                                                    }
+                                                    
+                                                    
                                                 </tbody>
                                             </table>
 
