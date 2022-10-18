@@ -1,0 +1,21 @@
+{
+  "name": "learning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "ll": "ls -l"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "nodemon": "^2.0.20",
+    "uniq": "^1.0.1"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
