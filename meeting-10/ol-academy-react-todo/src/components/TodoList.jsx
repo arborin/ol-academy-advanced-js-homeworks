@@ -23,18 +23,21 @@ class TodoList extends React.Component{
     }
     
     saveTask = () => {
+        this.setState({nameExists: false});
+        
         const inputVal = this.state.inputValue;
-        this.setState({nameExists: false})
+        let checkName = false;
         
         //check if name exists
         this.state.todos.map((todo)=>{
-            if(todo.name == inputVal){
-                this.setState({nameExists: true})
+            if(todo.name === inputVal){
+                checkName = true;
+                this.setState({nameExists: true});
             }
         })
         
         
-        if(this.state.nameExists === false){
+        if(checkName === false){
             this.state.todos.push({ name : inputVal, status: 'active'});
             this.setState({todos: this.state.todos });
         }
