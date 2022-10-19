@@ -8,7 +8,8 @@ class Todo extends React.Component{
             todos: [
                 {id: 1, title: "JS"},
                 {id: 2, title: "React"}
-            ]
+            ],
+            inputValue: "test"
         };
     }
     
@@ -17,7 +18,7 @@ class Todo extends React.Component{
         console.log(id);
         
         const filterTodos = this.state.todos.filter((todo) => {
-            return todo.id != id;
+            return todo.id !== id;
         });
         
         this.setState({
@@ -25,10 +26,19 @@ class Todo extends React.Component{
         });
     }
     
+    handleInputChange = (event) => {
+        const value = event.target.value;
+        
+        this.setState({inputValue: value});
+    }
+    
     render(){
         return (
             <div>
                 <h1>Todo</h1>
+                <form>
+                    <input type='text' value={this.state.inputValue} onChange={this.handleInputChange}/>
+                </form>
                 <ul>
                     {
                         this.state.todos.map((todo) => {
