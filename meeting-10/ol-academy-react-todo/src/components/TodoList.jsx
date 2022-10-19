@@ -23,28 +23,66 @@ class TodoList extends React.Component{
     }
     
     saveTask = () => {
-        this.setState({nameExists: false});
+        this.setNotification(false);
         
-        const inputVal = this.state.inputValue;
+        const inputVal = this.state.inputValue.trim();
         let checkName = false;
         
         //check if name exists
         this.state.todos.map((todo)=>{
             if(todo.name === inputVal){
                 checkName = true;
-                this.setState({nameExists: true});
+                this.setNotification(true);
             }
         })
         
         
-        if(checkName === false){
+        if(checkName === false && inputVal !== ''){
             this.state.todos.push({ name : inputVal, status: 'active'});
             this.setState({todos: this.state.todos });
         }
         
+        
+        
         this.setState({inputValue: ''}); // claer input value
         
     }
+    
+    deleteAll = () => {
+        this.setNotification(false);
+        this.setState({todos: []});
+    }
+    
+    deleteDone = () => {
+        this.setNotification(false);
+        this.setState({todos: this.state.todos.filter((todo)=>{ return todo.status === "active"})})
+    }
+    
+    deleteTask = () => {
+        
+    }
+    
+    setNotification = (status) => {
+        this.setState({nameExists: status});
+    }
+    
+    doneTask = (index) => {
+        this.setNotification(false);
+        
+        let todos = this.state.todos;
+        todos[index]['status'] = 'done';
+        
+        this.setState({todos: todos});
+    }
+    
+    deleteTask = (index) => {
+        this.setNotification(false);
+        
+        let todos =  this.state.todos;
+        todos.splice(index, 1); 
+        this.setState({todos: todos});
+    }
+    
     
     
     render(){
@@ -73,7 +111,11 @@ class TodoList extends React.Component{
                                                 </div>
 
                                                 <div className="col-12">
-                                                    <button type="button" className="btn btn-warning">Delete All</button>
+                                                    <button type="button" onClick={this.deleteAll}className="btn btn-warning">Delete All</button>
+                                                </div>
+                                                
+                                                <div className="col-12">
+                                                    <button type="button" onClick={this.deleteDone}className="btn btn-success">Delete Done</button>
                                                 </div>
                                             </form>
                                             
@@ -98,9 +140,9 @@ class TodoList extends React.Component{
                                                                         <td>{todo.name}</td>
                                                                         <td>{todo.status}</td>
                                                                         <td>
-                                                                            <button type="submit" className="btn btn-danger btn-sm">Delete</button>
+                                                                            <button type="submit" className="btn btn-danger btn-sm" onClick={()=>{this.deleteTask(index)}}>Delete</button>
                                                                             
-                                                                            { (todo.status === 'active') ? <button type="submit" className="btn btn-success ms-1 btn-sm">Done</button> : ''}
+                                                                            { (todo.status === 'active') ? <button type="button" onClick={()=>{this.doneTask(index)}}className="btn btn-success ms-1 btn-sm">Done</button> : ''}
                                                                         </td>
                                                                     </tr>
                                                                 )
